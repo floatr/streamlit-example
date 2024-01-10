@@ -2,6 +2,7 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
+import yaml
 import streamlit_authenticator as stauth
 from yaml.loader import SafeLoader
 
@@ -18,47 +19,17 @@ authenticator = stauth.Authenticate(
     config['preauthorized']
 )
 
-# Check if the user is authenticated
-if not authenticator.is_authenticated():
-    st.warning("Please log in to access the app.")
-    email = st.text_input("Email:")
-    password = st.text_input("Password:", type="password")
+# Initialize session state
+if 'authentication_status' not in st.session_state:
+    st.session_state['authentication_status'] = None
+    
+authenticator.login('Login', 'main')
 
-    # Check if the user is preauthorized
-    if authenticator.is_preauthorized(email):
-        if st.button("Login"):
-            if authenticator.authenticate(email, password):
-                st.success(f"Successfully logged in as {authenticator.get_username(email)}!")
-            else:
-                st.error("Invalid credentials. Please try again.")
-    else:
-        st.warning("You are not authorized to access this app. Please contact support.")
-else:
-    st.success(f"Welcome back, {authenticator.get_username()}!")
-    # Continue with your existing app logic
-
-    num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
-    num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
-
-    indices = np.linspace(0, 1, num_points)
-    theta = 2 * np.pi * num_turns * indices
-    radius = indices
-
-    x = radius * np.cos(theta)
-    y = radius * np.sin(theta)
-
-    df = pd.DataFrame({
-        "x": x,
-        "y": y,
-        "idx": indices,
-        "rand": np.random.randn(num_points),
-    })
-
-    st.altair_chart(alt.Chart(df, height=700, width=700)
-                    .mark_point(filled=True)
-                    .encode(
-                        x=alt.X("x", axis=None),
-                        y=alt.Y("y", axis=None),
-                        color=alt.Color("idx", legend=None, scale=alt.Scale()),
-                        size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-                    ))
+if st.session_state['authentication_status']:
+    authenticator.logout('Logout', 'main', key='unique_key')
+    st.write(f'Welcome *{st.session_state["name"]}*')
+    st.title('Some content')
+elif st.session_state['authentication_status'] is False:
+    st.error('Username/password is incorrect')
+elif st.session_state['authentication_status'] is None:
+    st.warning('Please enter your username and password')
