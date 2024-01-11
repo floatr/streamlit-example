@@ -7,19 +7,19 @@ credentials:
     juana:
       email: juana@nativatraders.com
       name: Juana
-      password: $2b$12$E9/bCaN/r8sN/FV2l8NpgOgspUBAp7UAVU6BgsXJzp/pW8gQWCprC
+      password: $2b$12$kIynAHQOEK0mzM9YHtNGbuXRQxlgDX1UHLV7oitX/sdbt.CWggcnG
     kedar:
       email: kedar@nativatraders.com
       name: Kedar
-      password: $2b$12$veUHDUOxMPpYTgIivZbUqufvgGlv3zX5uZ5np7dmGdmtOB0Z1e2q6
+      password: $2b$12$kIynAHQOEK0mzM9YHtNGbuXRQxlgDX1UHLV7oitX/sdbt.CWggcnG
     gabriel:
       email: gabriel@nativatraders.com
       name: Gabriel
-      password: $2b$12$uNaTgvGPG9rMbzOJHYaPQePw0DUfp1qHBrSq6l4O304qani6pKFpm
+      password: $2b$12$kIynAHQOEK0mzM9YHtNGbuXRQxlgDX1UHLV7oitX/sdbt.CWggcnG
     cristina:
       email: cherrera@vitakai.com
       name: Cristina
-      password: $2b$12$Tir/PbHVmmnt5kgNxgOwMuxNIb2fv2pJ.q71TW8ekvbugCqkye4yu
+      password: $2b$12$kIynAHQOEK0mzM9YHtNGbuXRQxlgDX1UHLV7oitX/sdbt.CWggcnG
 preauthorized:
   emails:
   - cgonzalez@vitakai.com
